@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"> <!-- bean definitions here -->
+
+    <bean id="name" class="java.lang.String">
+        <constructor-arg value="Protick"/>
+    </bean>
+
+    <bean id="age" class="java.lang.Integer">
+        <constructor-arg value="29"/>
+    </bean>
+
+    <bean id="game" class="com.protick.learnspringframework.game.PacmanGame"/>
+
+    <bean id="gameRunner" class="com.protick.learnspringframework.game.GameRunner">
+        <constructor-arg ref="game"/>
+    </bean>
+
+</beans>
