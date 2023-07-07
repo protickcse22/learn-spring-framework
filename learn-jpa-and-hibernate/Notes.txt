@@ -1,0 +1,6 @@
+SELECT * FROM COURSE
+
+insert into course(id,name,author)
+values(1,'raw insert','protick')
+
+delete from course where id = 1
