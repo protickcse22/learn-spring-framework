@@ -3,7 +3,8 @@
 		<title> Welcome Page</title>
 	</head>
 	<body>
-		Welcome ${name} ${password}
-
+		Welcome to ${name}
+		<hr>
+        <div><a href="list-todos">Manage</a> Todo list</div>
 	</body>
 </html>
