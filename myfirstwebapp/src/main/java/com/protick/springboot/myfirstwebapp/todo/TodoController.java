@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,9 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = "add-todo", method = RequestMethod.POST)
-	public String addNewTodo(@RequestParam String description) {
+	public String addNewTodo(@RequestParam String description, ModelMap map) {
+		String userName = (String)map.get("name");
+		todoService.addTodo(userName, description, LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos";
 	}
 }
