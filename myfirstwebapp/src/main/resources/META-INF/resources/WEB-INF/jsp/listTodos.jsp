@@ -2,36 +2,43 @@
 
 <html>
 <head>
+<link href="webjars/bootstrap/5.3.0/css/bootstrap.min.css"
+	rel="stylesheet"></link>
 <title>List todos Page</title>
 </head>
 <body>
-	<div>Welcome to ${name}</div>
-	<hr>
-	<h1>Your Todos are</h1>
-	<table>
-		<thead>
+	<div class="container">
+		<h1>Your Todos are</h1>
+		<table class="table">
+			<thead>
 
-			<tr>
-				<th>id</th>
-				<th>Description</th>
-				<th>Target Date</th>
-				<th>Is Done?</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${todos}" var="todo">
 				<tr>
-					<td>${todo.id}</td>
-					<td>${todo.description}</td>
-					<td>${todo.targetDate}</td>
-					<td>${todo.done}</td>
+					<th>id</th>
+					<th>Description</th>
+					<th>Target Date</th>
+					<th>Is Done?</th>
 				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${todos}" var="todo">
+					<tr>
+						<td>${todo.id}</td>
+						<td>${todo.description}</td>
+						<td>${todo.targetDate}</td>
+						<td>${todo.done}</td>
+					</tr>
 
-			</c:forEach>
+				</c:forEach>
 
 
-		</tbody>
+			</tbody>
 
-	</table>
+		</table>
+		<a href="add-todo"class="btn btn-success">Add Todo</a>
+	</div>
+	<script type="text/javascript"
+		src="webjars/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="webjars/jquery/3.6.4/jquery.min.js"></script>
 </body>
+
 </html>
