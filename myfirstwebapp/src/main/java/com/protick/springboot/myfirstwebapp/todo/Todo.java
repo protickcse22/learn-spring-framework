@@ -5,8 +5,19 @@ package com.protick.springboot.myfirstwebapp.todo;
 
 import java.time.LocalDate;
 
+import org.apache.logging.log4j.message.Message;
+
+import jakarta.validation.constraints.Size;
+
 public class Todo {
 
+    private int id;
+    private String username;
+    @Size(min = 10, message = "Enter at least 10 characters")
+    private String description;
+    private LocalDate targetDate;
+    private boolean done;
+    
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         super();
         this.id = id;
@@ -15,12 +26,6 @@ public class Todo {
         this.targetDate = targetDate;
         this.done = done;
     }
-
-    private int id;
-    private String username;
-    private String description;
-    private LocalDate targetDate;
-    private boolean done;
 
     public int getId() {
         return id;
