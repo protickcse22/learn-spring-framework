@@ -2,11 +2,9 @@
 <html>
 <head>
 
-<link href="webjars/bootstrap-datetimepicker/2.4.4/css/bootstrap-datetimepicker.min.css"
+<link href="webjars/bootstrap/5.3.0/css/bootstrap.min.css"
 	rel="stylesheet"></link>
-<link
-	href="webjars/bootstrap-datepicker/2.4.4/css/bootstrap-datepicker.standalone.min.css"
-	rel="stylesheet">
+	<link href="webjars/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"></link>
 <title>Todo Page</title>
 </head>
 <body>
@@ -36,12 +34,14 @@
 	<script type="text/javascript"
 		src="webjars/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="webjars/jquery/3.6.4/jquery.min.js"></script>
-	<script
-		src="webjars/bootstrap-datetimepicker/2.4.4/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script type="text/javascript">
-		$('#targetDate').datepicker({
-			format : 'yyyy-mm-dd'
-		});
-		</body>
-		</html>
-	
+    	$('#targetDate').datepicker({
+    	    format: 'yyyy-mm-dd'
+    	});
+    </script>
+
+
+	</script>
+</body>
+</html>
