@@ -1,23 +1,71 @@
-function TodoComponent() {
-    const today = new Date()
-    const targetDate = new Date(today.getFullYear() + 12, today.getMonth(), today.getDay())
+import { useEffect, useState } from "react"
+import { deleteTodo, retrieveAllTodos } from "./api/TodoApiService"
+import { useAuth } from "./security/AuthContext"
 
-    const todos = [
-        { id: 1, description: 'Learn AWS', done: false, targetDate: targetDate },
-        { id: 2, description: 'Learn Full stack development', done: false, targetDate: targetDate },
-        { id: 3, description: 'Learn DevOps', done: false, targetDate: targetDate }
-    ]
+
+function TodoComponent() {
+
+    useEffect(
+        () => calltrieveTodosAPI(), []
+    )
+
+    const [todos, setTodos] = useState([])
+
+    const [message, setMessage] = useState(null)
+
+    const [showElement, setShowElement] = useState(true)
+
+    const authContext = useAuth()
+
+    useEffect(
+        () => {
+            setTimeout(
+                () => {
+                    setShowElement(false)
+                }, 10000
+            )
+        }, []
+    )
+ 
+    const calltrieveTodosAPI = () => retrieveAllTodos(authContext.username)
+        .then(
+            response => successFulResponse(response)
+        )
+        .catch(
+            error => console.log(error)
+        )
+
+    function successFulResponse(response) {
+        setTodos(response.data)
+    }
+
+    function callDeleteTodoAPI(id) {
+        deleteTodo(authContext.username, id)
+            .then(
+                () => {
+                    setMessage(`Delete of todo with id: ${id} successful`)
+                    calltrieveTodosAPI()
+                }
+            )
+            .catch()
+    }
+
+
+
+
     return (
         <div className="container">
             <h1>Things you want to add</h1>
+            {message && showElement && <div className="alert alert-warning">{message}</div>}
             <div>
                 <table className='table'>
                     <thead>
                         <tr>
-                            <td>ID</td>
-                            <td>Description</td>
-                            <td>Is Done?</td>
-                            <td>Target Date</td>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Is Done?</th>
+                            <th>Target Date</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,7 +76,8 @@ function TodoComponent() {
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
-                                        <td>{todo.targetDate.toDateString()}</td>
+                                        <td>{todo.targetDate.toString()}</td>
+                                        <td><button className="btn btn-warning" onClick={() => callDeleteTodoAPI(todo.id)}>Delete</button></td>
                                     </tr>
                                 )
                             )
