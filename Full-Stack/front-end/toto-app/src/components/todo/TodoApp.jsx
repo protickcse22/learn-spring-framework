@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route, useNavigate, useParams, Link, Navigate } 
 import HeaderComponent from './HeaderComponent'
 import LoginComponent from './LoginComponent'
 import LogoutComponent from './LogoutComponent'
-import TodoComponent from './TodoComponent'
+import ListTodoComponent from './ListTodoComponent'
 import ErrorComponent from './ErrorComponent'
 import WelcomeComponent from './WelcomeComponent'
 import FooterComponent from './FooterComponent'
 import './TodoApp.css'
 import AuthProvider, { useAuth } from './security/AuthContext'
+import TodoComponent from './TodoComponent'
 
 
 function AuthenticatedRoute({ children }) {
@@ -42,8 +43,15 @@ export default function TodoApp() {
                         } />
                         <Route path='/todos' element={
                             <AuthenticatedRoute>
+                                <ListTodoComponent />
+                            </AuthenticatedRoute>
+                        } />
+
+                        <Route path='/todo/:id' element={
+                            <AuthenticatedRoute>
                                 <TodoComponent />
                             </AuthenticatedRoute>
+
                         } />
                         <Route path='*' element={<ErrorComponent />} />
                     </Routes>

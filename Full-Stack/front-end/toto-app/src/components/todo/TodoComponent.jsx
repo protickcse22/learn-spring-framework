@@ -1,89 +1,34 @@
-import { useEffect, useState } from "react"
-import { deleteTodo, retrieveAllTodos } from "./api/TodoApiService"
+import { useParams } from "react-router-dom"
 import { useAuth } from "./security/AuthContext"
-
+import { retrieveTodoResource } from "./api/TodoApiService"
+import { useEffect, useState } from "react"
 
 function TodoComponent() {
+    const {id} = useParams()
+
+    const auth = useAuth()
 
     useEffect(
-        () => calltrieveTodosAPI(), []
+        () => retrieveTodo(),[id]
     )
 
-    const [todos, setTodos] = useState([])
+    const [description,setDescription]  = useState()
 
-    const [message, setMessage] = useState(null)
-
-    const [showElement, setShowElement] = useState(true)
-
-    const authContext = useAuth()
-
-    useEffect(
-        () => {
-            setTimeout(
-                () => {
-                    setShowElement(false)
-                }, 10000
-            )
-        }, []
-    )
- 
-    const calltrieveTodosAPI = () => retrieveAllTodos(authContext.username)
+    function retrieveTodo() {
+        retrieveTodoResource(auth.username,id)
         .then(
-            response => successFulResponse(response)
+            response => setTodo(response.data.description)
         )
         .catch(
             error => console.log(error)
         )
-
-    function successFulResponse(response) {
-        setTodos(response.data)
     }
-
-    function callDeleteTodoAPI(id) {
-        deleteTodo(authContext.username, id)
-            .then(
-                () => {
-                    setMessage(`Delete of todo with id: ${id} successful`)
-                    calltrieveTodosAPI()
-                }
-            )
-            .catch()
-    }
-
-
-
 
     return (
-        <div className="container">
-            <h1>Things you want to add</h1>
-            {message && showElement && <div className="alert alert-warning">{message}</div>}
+        <div className="LogoutComponent">
+            <h1>Enter toto details</h1>
             <div>
-                <table className='table'>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Description</th>
-                            <th>Is Done?</th>
-                            <th>Target Date</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            todos.map(
-                                todo => (
-                                    <tr key={todo.id}>
-                                        <td>{todo.id}</td>
-                                        <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td>
-                                        <td>{todo.targetDate.toString()}</td>
-                                        <td><button className="btn btn-warning" onClick={() => callDeleteTodoAPI(todo.id)}>Delete</button></td>
-                                    </tr>
-                                )
-                            )
-                        }
-                    </tbody>
-                </table>
+                {description}
             </div>
         </div>
     )
