@@ -1,13 +1,4 @@
-import axios from "axios";
-import { BASE_URL } from "./Endpoints";
-
-
-
-const apiClient = axios.create(
-    {
-        baseURL: BASE_URL
-    }
-)
+import { apiClient } from "./ApiClient"
 
 export const retrieveAllTodos
     = (username) => apiClient.get(`/users/${username}/todos`)

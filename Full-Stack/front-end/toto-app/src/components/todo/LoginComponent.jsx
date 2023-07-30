@@ -4,7 +4,7 @@ import { useAuth } from "./security/AuthContext"
 
 function LoginComponent() {
 
-    const [userName, setUserName] = useState('protick')
+    const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
 
     const [showErrorMsg, setErrorMsg] = useState(false)
@@ -14,8 +14,9 @@ function LoginComponent() {
     const authContext = useAuth()
 
 
-    function handleSubmit() {
-        if (authContext.login(userName,password)) {
+    async function handleSubmit() {
+        console.log(userName)
+        if (await authContext.login(userName,password)) {
             navigate(`/welcome/${userName}`)
         } else {
             setErrorMsg(true)

@@ -18,6 +18,13 @@ public class HelloWorldController {
         this.messageSource = messageSource;
     }
 
+
+
+    @GetMapping(path = "/basicauth")
+    public String basicAuthCheck() {
+        return "success";
+    }
+
     @GetMapping(path = "/hello-world")
     public String helloWorld() {
         return "Hello World in the spring boot rest api-protick";
